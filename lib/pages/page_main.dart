@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maple_ing/custom_app_bar.dart';
 
 class PageMain extends StatelessWidget {
   PageMain({super.key});
@@ -18,14 +19,19 @@ class PageMain extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Left Drawer'),
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
+              child: Text('Left Drawer'),
             ),
             ListTile(
-              title: Text('text 1'),
+              title: const Text(
+                'text 1',
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -37,14 +43,14 @@ class PageMain extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('Right Drawer'),
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
+              child: Text('Right Drawer'),
             ),
             ListTile(
-              title: Text('text 2'),
+              title: const Text('text 2'),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -52,43 +58,35 @@ class PageMain extends StatelessWidget {
           ],
         ),
       ),
-      appBar: AppBar(
-        title: Center(
-          child: Text(
-            "메이플링",
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-        ),
-        leading: TextButton(
-          child: Text(
-            "모든 기능 보기",
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
-        leadingWidth: 120,
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.account_circle,
-            ),
-            onPressed: () {
-              _scaffoldKey.currentState!.openEndDrawer();
-            },
-          )
-        ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: CustomAppBar(scaffoldKey: _scaffoldKey),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Text(
-            "Test for Navigation Drawer from both side"
-          ),
+      body: const SafeArea(
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: SizedBox(
+                width: double.infinity,
+                height: 2,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Test for Navigation Drawer from both side",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            )
+          ],
         )
       ),
     );
